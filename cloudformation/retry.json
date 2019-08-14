@@ -1,0 +1,45 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "testing ec2 with cf",
+	"Parameters": {
+
+		"imageidformachine": {
+			"Description": "imageidformachine",
+			"Type": "String",
+			"Default": "ami-06358f49b5839867c"
+		},
+
+		"machinetype": {
+			"Type": "String",
+			"Default": "t2.micro"
+		},
+
+		"jenkinssg": {
+			"Type": "String",
+			"Default": "sg-049c5a8c8ab866f6a"
+		}
+
+
+	},
+	"Resources": {
+
+
+		"myec2": {
+			"Type": "AWS::EC2::Instance",
+			"Properties": {
+				"KeyName": "mackey",
+				"ImageId": {
+					"Ref": "imageidformachine"
+				},
+				"InstanceType": {
+					"Ref": "machinetype"
+				},
+				"SecurityGroupIds": [{
+					"Ref": "jenkinssg"
+				}]
+			}
+		}
+
+
+	}
+}
