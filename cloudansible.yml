@@ -1,0 +1,10 @@
+---
+- hosts: cloud
+  user: ubuntu
+  become: yes
+
+  tasks: 
+    - name: install httpd
+      apt:
+         name: apache2
+         state: present

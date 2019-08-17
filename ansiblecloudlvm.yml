@@ -1,0 +1,54 @@
+
+---
+- hosts: cloud
+  user: ubuntu
+  become: yes
+  vars_prompt:
+    - name: "VGNAME"
+      prompt: "What is the name of the vg ? "
+      private: no 
+
+    - name: "PVNAME"
+      prompt: "What is the name of the pv ? "
+      private: no
+
+    - name: "LVNAME"
+      prompt: "What is the name of the lv ? "
+      private: no
+
+    - name: "DEVNAME"
+      prompt: "What is the name of target block dev ?"
+      private: no
+    
+    - name: "SRCNAME"
+      prompt: "What is the path on which device to be mounted ?"
+      private: no
+
+    - name: "MOUNT"
+      prompt: "What is the name of the mount point"
+      private: no 
+
+  tasks:
+  - name: "create vg"
+    lvg:
+           vg: "{{VGNAME}}"
+           pvs: "{{PVNAME}}"
+
+  - name: "create lv"
+    lvol: 
+           vg: "{{VGNAME}}"
+           lv: "{{LVNAME}}"
+           size: 1500M
+
+  - name: "create filesystem"
+    filesystem:
+           fstype: ext4
+           dev: "{{DEVNAME}}"
+
+  - name: "mount file system"
+    mount: 
+           name: "{{MOUNT}}"
+           src:  "{{SRCNAME}}"
+           fstype: ext4
+           state: mounted
+

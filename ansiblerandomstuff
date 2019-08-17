@@ -1,0 +1,33 @@
+- name: Ensure the ansible user is sudoer with no password required
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^ansible ALL\='
+      line: 'ansible ALL=(ALL) NOPASSWD:ALL'
+      validate: 'visudo -cf %s'
+
+
+
+
+
+
+---
+- hosts: all
+  remote_user: root
+  vars_files:
+    - "vars/common.yml"
+    - [ "vars/{{ ansible_facts['os_family'] }}.yml", "vars/os_defaults.yml" ]
+  tasks:
+  - name: make sure apache is started
+    service: name={{ apache }} state=started
+
+
+---
+# for vars/RedHat.yml
+apache: httpd
+somethingelse: 42
+
+
+
+ansible -m setup -a 'filter=ansible_hostname' localhost
+

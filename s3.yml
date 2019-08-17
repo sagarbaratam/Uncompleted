@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  vars_prompt: 
+    - name: "aws_bucket_name"
+      prompt: "what is the name of the bucket ? "
+      private: no
+    
+    - name: "aws_source_name"
+      prompt: "Specify the object to be transferred ?"
+      private: no 
+  tasks:
+    - name:
+      s3:
+           aws_access_key_id: "{{lookup('env','aws_key')}}"
+           aws_secret_access_key: "{{lookup ('env','aws_secret')}}"
+           bucket: "{{aws_bucket_name}}"
+           object: "{{aws_source_name}}"
+           mode: put
+           overwrite: no

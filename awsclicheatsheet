@@ -1,0 +1,76 @@
+Aws cli cheat sheet:
+
+read before interviews:
+
+
+EBS:
+
+Describe volumes:
+aws ec2 describe-volumes
+
+Describe volumes which are in available state:
+aws ec2 describe-volumes --filter Name=status,Values=available Name=availability-zone,Values=eu-west-1b
+
+To list the volumes which are attached state
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Name:ImageId,InstanceId:InstanceId,VolumeInfo:BlockDeviceMappings}'
+
+to create a volumes
+aws ec2 create-volume --size 10 --region eu-west-1 --availability-zone eu-west-1b --volume-type gp2
+
+to create a volume from snapshot
+aws ec2 create-volume --region eu-west-1 --availability-zone eu-west-1b --snapshot-id snap-03598228fabc3140a  --volume-type gp2
+
+to attach a volume to an instances
+aws ec2 attach-volume --volume-id vol-0101726c4b580092d --instance-id i-0b7ca3cf750dcc248 --device /dev/sdf
+
+to detach volume 
+aws ec2 detach-volume --volume-id vol-0101726c4b580092d
+
+to delete volume
+aws ec2 delete-volume --volume-id vol-0101726c4b580092d
+
+to create a snapshot of root volume
+aws ec2 create-snapshot --volume-id vol-05963b08d501d0038 --description "this is root volume snapshot"
+
+to delete a snapshot 
+aws ec2 delete-snapshot --snapshot-id snap-01c1d707a74423bc0
+
+
+
+Aws Image creation:
+
+
+
+
+
+
+
+http://skillslane.com/aws-tutorial-vpc-launch-instance-cli/
+
+
+AWS VPC:
+
+to create a vpc with name mydemo2
+aws ec2 create-vpc --cidr-block 10.0.0.0/16
+aws ec2 create-tags --resources vpc-0d7495fff51cbac43 --tags Key=Name,Value=mydemo2
+
+
+
+aws ec2 describe-vpcs
+aws ec2 create-vpc --cidr-block 192.168.0.0/16
+aws ec2 create-tags --resources vpc-0d7495fff51cbac43 --tags Key=Name,Value=mydemo2
+aws ec2 create-subnet --vpc-id vpc-0d7495fff51cbac43 --cidr-block 192.168.1.0/24
+aws ec2 create-tags --resources subnet-073934baad30586e7 --tags Key=Name,Value=mydemo2subnet
+aws ec2 create-internet-gateway
+aws ec2 create-tags --resources igw-0de9517bdfaae925a --tags Key=Name,Value=mydemo2igw
+aws ec2 attach-internet-gateway --internet-gateway-id igw-0de9517bdfaae925a --vpc-id vpc-0d7495fff51cbac43
+aws ec2 create-route-table --vpc-id vpc-0d7495fff51cbac43
+aws ec2 create-route --route-table-id rtb-0933ca035e7e6735e --destination-cidr-block 0.0.0.0/0 --gateway-id igw-0de9517bdfaae925a 
+aws ec2 create-tags --resources rtb-0933ca035e7e6735e --tags Key=Name,Value=mydemo2rt
+aws ec2 associate-route-table --route-table-id rtb-0933ca035e7e6735e --subnet-id subnet-073934baad30586e7
+aws ec2 run-instances --image-id ami-08d658f84a6d84a80 --count 1 --instance-type t2.micro --key-name fedpemkey --subnet-id subnet-073934baad30586e7 --associate-public-ip-address
+aws ec2 create-tags --resources i-083bfcec543ceb4f8 --tags Key=Name,Value=mydemo2instance
+
+
+
+***Aws system manager services *** -- VVIMP 

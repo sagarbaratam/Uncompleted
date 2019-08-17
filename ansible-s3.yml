@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  vars_prompt:
+    - name: "aws_bucket_name"
+      prompt: "what is the name of the bucket ? "
+      private: no
+
+    - name: "dest_path"
+      prompt: "Specify the path in s3 bucket?"
+      private: no
+    
+    - name: "src_path"
+      prompt: "specify the source path on local machine"
+  tasks:
+    - name:
+      aws_s3:
+           aws_access_key: "{{lookup('env','aws_key')}}"
+           aws_secret_key: "{{lookup ('env','aws_secret')}}"
+           bucket: "{{aws_bucket_name}}"
+           object: "{{dest_path}}"
+           src: "{{src_path}}"
+           mode: put
+           overwrite: no
