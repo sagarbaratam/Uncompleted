@@ -1,0 +1,30 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "cloud watch",
+    
+    "Resources":{
+      
+      "cloudWatchAlarm": {
+         "Type": "AWS::CloudWatch::Alarm",
+         "Properties": {
+            "MetricName": "",
+            "Namespace": "",
+            "ComparisonOperator": "",
+            "EvaluationPeriods": "",
+            "Period": "",
+            "Statistic": "",
+            "Threshold": "",
+            "ActionsEnabled": "true | false",
+            "AlarmActions": [ "" ],
+            "AlarmDescription": "",
+            "AlarmName": "",
+            "Dimensions": [ "" ],
+            "InsufficientDataActions": [ "" ],
+            "OKActions": [ "" ],
+            "Unit": ""
+         }
+      }
+      
+    }
+       
+       

@@ -1,0 +1,8 @@
+
+---
+  hosts: all 
+  become: sudo 
+  tasks: 
+    - name: Desired playbook version
+      set_fact: 
+      

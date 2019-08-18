@@ -1,0 +1,154 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "testing ec2 with cf",
+    "Parameters":{
+		
+		"vpccidr": {
+			"Description": "CIDR range for VPC",
+			"Type": "String",
+			"Default": "192.168.0.0/16"
+		},
+		
+		"subnetcidr": {
+			"Description": "CIDR range for subnet",
+			"Type": "String",
+			"Default": "192.168.1.0/24"
+		},
+		
+		"azone": {
+			"Description": "Availabiltiy Zone",
+			"Type": "String",
+			"Default": "eu-west-1b"
+		}
+		
+		
+	},
+
+	"Resources": {
+
+
+		"firstvpc": {
+			"Type": "AWS::EC2::VPC",
+			"Properties": {
+				"CidrBlock": 
+				{ "Ref": "vpccidr" }
+				,
+				
+				"EnableDnsHostnames": "true",
+				
+				"Tags":[
+				{ "Key": "Name", "Value":  "First" }
+				]
+
+			}
+		},
+		
+		"firstsubnet": {
+		  "Type": "AWS::EC2::Subnet",
+		  "Properties": {
+			"AvailabilityZone": 
+			{ "Ref": "azone" }
+			,
+			"VpcId": 
+			{ "Ref": "firstvpc" },
+			
+			"CidrBlock": 
+			{ "Ref": "subnetcidr" }
+			,
+			"Tags": [{"Key":"Name","Value":"First"}]
+		  }
+		},
+
+		
+		"firstigw": {
+		  "Type": "AWS::EC2::InternetGateway",
+		  "Properties": {
+			"Tags":[
+			{ "Key": "Name", "Value":  "firstigw" }
+			]
+		  }
+		},
+		"AttachGateway": {
+		  "Type": "AWS::EC2::VPCGatewayAttachment",
+		  "Properties": {
+			"VpcId": { "Ref": "firstvpc" },
+			"InternetGatewayId": { "Ref": "firstigw" }
+		  }
+		},
+		
+		"firstroutetable": {
+		  "Type": "AWS::EC2::RouteTable",
+		  "Properties": {
+			"VpcId":{ "Ref": "firstvpc" }
+		  }
+		},
+		
+		"firstrt": {
+		  "Type": "AWS::EC2::Route",
+		  "Properties": {
+			"RouteTableId":{ "Ref": "firstroutetable" },
+			"DestinationCidrBlock": "0.0.0.0/0",
+			"GatewayId":{ "Ref": "firstigw" }
+			
+		  }
+		},
+
+		"firstsecgrp" : {
+		  "Type" : "AWS::EC2::SecurityGroup",
+		  "Properties" : {
+			"GroupDescription" : "SG to test first",
+			"SecurityGroupIngress" : [
+			{"IpProtocol": "tcp","FromPort": "22","ToPort": "22","CidrIp" :"0.0.0.0/0"},
+		    { "IpProtocol": "tcp","FromPort": "80","ToPort": "80","CidrIp" :"0.0.0.0/0"}],
+			"VpcId" : 
+			{ "Ref": "firstvpc" }
+			
+			
+		  }
+		},
+		"firstec2": {
+			"Type": "AWS::EC2::Instance",
+			"Properties": {
+				"KeyName": "mackey",
+				"ImageId": "ami-06358f49b5839867c",
+				"InstanceType": "t2.micro",
+				"Monitoring": "true",
+				"NetworkInterfaces": [{
+				"SubnetId": {"Ref":"firstsubnet"},
+				"AssociatePublicIpAddress": "true",
+				"DeviceIndex": "0",
+				"GroupSet": [{ "Ref" :"firstsecgrp"}]
+				}
+				],
+				
+				"Tags": [
+					{
+						"Key": "Name",
+						"Value": "firstec2"
+					}
+				]		
+		    }
+		}
+	},
+
+	"Outputs":{
+		
+		"VPCID" : {
+		  "Description":"VPC ID for test stack",
+		  "Value" :{ "Ref": "firstvpc" }
+		},
+		
+		"SubnetID" : {
+		  "Description": "Subnet ID of firstsubnet",
+		  "Value" :{ "Ref": "firstsubnet" }  
+		},
+
+		"IGWID" : {
+		  "Description":"ID of firstigw",
+		  "Value" :{ "Ref": "firstigw" } 
+		}
+	}		
+}
+		
+
+	
