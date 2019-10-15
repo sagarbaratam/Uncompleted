@@ -1,0 +1,20 @@
+
+aws ec2 run-instances --image-id ami-0ce71448843cb18a1 --count 1 --instance-type t2.micro --key-name mackey --security-groups sg-09b0a236f6f7c0674
+
+
+- name: Start sandbox instances
+  hosts: localhost
+  gather_facts: false
+  vars:
+    instance_ids:
+      - 'i-0c96660ec308a8923'
+    region: eu-west-1
+  tasks:
+    - name: Start the sandbox instances
+      ec2:
+        instance_ids: '{{ instance_ids }}'
+        region: '{{ region }}'
+        state: running
+        
+        
+        

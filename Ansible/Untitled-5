@@ -1,0 +1,10 @@
+
+take each from that text file and convert - to _ 
+
+then convert that string to a url adding prefix and suffix 
+
+
+for i in `cat imr.txt`:
+do sed -i 's/-/
+
+

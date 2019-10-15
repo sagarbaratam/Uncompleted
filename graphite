@@ -1,0 +1,26 @@
+
+# Time series data
+
+running on centos, 
+
+Agentless tool
+
+/opt/graphite
+
+components:
+carbon -- service which runs on graphite server
+whisper -- database
+webapp -- UI
+
+collectd - will send the data to graphite
+
+format: hostname: data: epoch time: 
+
+x axis- Time
+y axis - metric(cpu,memory etc)
+
+
+
+operations center
+
+

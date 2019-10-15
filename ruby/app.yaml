@@ -1,0 +1,24 @@
+---
+app_type: ''
+deploy_base: "/opt/deployasaurus"
+app_base: "/opt/tomcat/webapps"
+app_user: tomcat
+app_group: tomcat
+property_base: "/opt/app/config"
+property_exclusions: []
+pre_deploy: []
+post_deploy: []
+remove_app_base: true
+artifact_name: ROOT.war
+heartbeat_on: curl -v -d true -H "Content-Type:text/plain" localhost/awake 2>&1
+heartbeat_off: curl -v -d false -H "Content-Type:text/plain" localhost/awake 2>&1
+heartbeat_verify_on: curl -sL localhost/awake -w \"%{http_code}\" | grep -q true &&
+  echo true
+heartbeat_verify_off: curl -sL localhost/awake -w \"%{http_code}\" | grep -q false
+  && echo false
+heartbeat_sleep: true
+commands:
+  tomcat:
+    start: "/bin/systemctl start tomcat"
+    stop: "/bin/systemctl stop tomcat"
+    status: "/bin/systemctl status tomcat"

@@ -1,0 +1,64 @@
+Calligator - https://monitoring.bestbuy.com/dashboard/datacenter/calligator_inf#?env=prod&from=1569292200&until=1569321000
+
+
+Clipper avail - https://monitoring.bestbuy.com/dashboard/datacenter/clipper_availability_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Clipper Reservation - https://monitoring.bestbuy.com/dashboard/datacenter/clipper_reservation_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Resource Server - https://monitoring.bestbuy.com/dashboard/datacenter/resource_server_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Smart Pricing App - https://monitoring.bestbuy.com/dashboard/datacenter/smart_pricing_app_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Smart Pricing Agg - https://monitoring.bestbuy.com/dashboard/datacenter/smart_pricing_agg_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Basket -  https://monitoring.bestbuy.com/dashboard/datacenter/basket_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+
+Profile - https://monitoring.bestbuy.com/dashboard/datacenter/profile_agg_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+
+Cargo App - https://monitoring.bestbuy.com/dashboard/datacenter/cargo_app_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Visitor Graph - https://monitoring.bestbuy.com/dashboard/datacenter/visitor_graph_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+CGraph DC - https://monitoring.bestbuy.com/dashboard/datacenter/customer_graph_api_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Location - https://monitoring.bestbuy.com/dashboard/datacenter/location_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+TRS - https://monitoring.bestbuy.com/dashboard/datacenter/trs_api_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Tax Services - https://monitoring.bestbuy.com/dashboard/datacenter/tax_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+CIA - https://monitoring.bestbuy.com/dashboard/datacenter/cia_identity_inf#?from=1569292200&until=1569321000&env=prod
+
+
+ExpressLane - https://monitoring.bestbuy.com/dashboard/datacenter/expresslane_inf#?env=prod&from=1569292200&until=1569321000
+
+
+Checkout - https://monitoring.bestbuy.com/dashboard/datacenter/checkout_agg_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Cart - https://monitoring.bestbuy.com/dashboard/datacenter/cart_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Commerce Services App - https://monitoring.bestbuy.com/dashboard/datacenter/commerce_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Clipper retail Avail - https://monitoring.bestbuy.com/dashboard/datacenter/avail_retail_dc_inf#?from=1569292200&until=1569321000&env=prod
+
+
+Order Submit - https://monitoring.bestbuy.com/dashboard/datacenter/order_submit_inf#?from=1569292200&until=1569321000&env=prod
+

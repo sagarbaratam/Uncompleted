@@ -10,8 +10,8 @@
 		},
 
 		"machinetype": {
-			"Type": "String",
-			"Default": "t2.micro"
+			"Type": ec2
+			
 		},
 
 		"jenkinssg": {

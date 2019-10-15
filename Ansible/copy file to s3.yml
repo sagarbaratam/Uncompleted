@@ -1,0 +1,18 @@
+--- 
+- 
+  hosts: localhost
+  vars:
+    keypair: mackey
+    image_id: ami-0ce71448843cb18a1
+    region: eu-west-1
+    security_groups: sg-09b0a236f6f7c0674
+
+  tasks: 
+    - 
+      name: "Simple ec2 instance"
+      ec2: 
+           key_name: "{{keypair}}" 
+           instance_type: t2.micro
+           image: "{{image_id}}"
+           region: "{{ region }}"
+           group: "{{security_groups}}"        
